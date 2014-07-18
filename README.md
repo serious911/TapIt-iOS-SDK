@@ -8,7 +8,7 @@ This is the iOS SDK for the TapIt! mobile ad network.  Go to http://tapit.com/ f
 
 Usage:
 ------
-To install, drag the TapIt.framework and TapIt.bundle files into your Xcode project.
+To install, drag the [TapIt.framework](https://github.com/tapit/TapIt-iOS-SDK/tree/master/Framework/TapIt.framework "TapIt.framework") and [TapIt.bundle](https://github.com/tapit/TapIt-iOS-SDK/tree/master/Framework/TapIt.bundle "TapIt.bundle") files into your Xcode project.
 
 The following frameworks are required:
 ````
