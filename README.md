@@ -73,7 +73,7 @@ tapitAd = [[TapItBannerAdView alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
 [self.tapitAd cancelAds];
 ````
 
-For a complete example, see https://github.com/tapit/TapIt-iPhone-SDK/blob/master/TapIt-iOS-Sample/BannerAdController.m
+For a complete example, see https://github.com/tapit/TapIt-iOS-SDK/blob/master/TapIt-iOS-Sample/BannerAdController.m
 
 
 Listen for location updates
@@ -131,7 +131,7 @@ TapItRequest *request = [TapItRequest requestWithAdZone:@"YOUR ZONE ID"];
     [self.interstitialAd presentFromViewController:self];
 }
 ````
-For a complete example, see https://github.com/tapit/TapIt-iPhone-SDK/blob/master/TapIt-iOS-Sample/InterstitialController.m
+For a complete example, see https://github.com/tapit/TapIt-iOS-SDK/blob/master/TapIt-iOS-Sample/InterstitialController.m
 
 Include in paged navigation
     
