@@ -60,7 +60,7 @@ Banner Usage
 #import <TapIt/TapIt.h>
 ...
 // init banner and add to your view
-tapitAd = [[TapItBannerAdView alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
+self.tapitAd = [[TapItBannerAdView alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
 [self.view addSubview:self.tapitAd];
 
 // kick off banner rotation!
@@ -174,12 +174,12 @@ retrieval of the ad.
     
     // Create an adsRequest object and request ads from the ad server with your own kZoneIdVideo
     TVASTAdsRequest *request = [TVASTAdsRequest requestWithAdZone:kZoneIdVideo;
-    [_videoAd requestAdsWithRequestObject:request];
+    [self.videoAd requestAdsWithRequestObject:request];
 
 If you want to specify the type of video ad you are requesting, use the call below.  
     
     TVASTAdsRequest *request = [TVASTAdsRequest requestWithAdZone:kZoneIdVideo];
-    [_videoAd requestAdsWithRequestObject:request andVideoType:TapItVideoTypeMidroll];
+    [self.videoAd requestAdsWithRequestObject:request andVideoType:TapItVideoTypeMidroll];
     
 Essentially, what needs to be included in the code is as follows:
 Note: the following uses Automatic Reference Counting so there will not be any object releases shown.
@@ -189,26 +189,20 @@ Note: the following uses Automatic Reference Counting so there will not be any o
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    _videoAd = [[TapItVideoInterstitialAd alloc] init];
-    _videoAd.delegate = self;
+    self.videoAd = [[TapItVideoInterstitialAd alloc] init];
+    self.videoAd.delegate = self;
     
     //Optional... override the presentingViewController (defaults to the delegate)
-    //_videoAd.presentingViewController = self;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    //self.videoAd.presentingViewController = self;
 }
 
 - (void)requestAds {    
     // Create an adsRequest object and request ads from the ad server with your own kZoneIdVideo
     TVASTAdsRequest *request = [TVASTAdsRequest requestWithAdZone:kZoneIdVideo];
-    [_videoAd requestAdsWithRequestObject:request];
+    [self.videoAd requestAdsWithRequestObject:request];
     
     //If you want to specify the type of video ad you are requesting, use the call below.
-    //[_videoAd requestAdsWithRequestObject:request andVideoType:TapItVideoTypeMidroll];
+    //[self.videoAd requestAdsWithRequestObject:request andVideoType:TapItVideoTypeMidroll];
 }
 
 - (IBAction)onRequestAds {
@@ -217,17 +211,17 @@ Note: the following uses Automatic Reference Counting so there will not be any o
 
 - (void)tapitVideoInterstitialAdDidFinish:(TapItVideoInterstitialAd *)videoAd {
     NSLog(@"Override point for resuming your app's content.");
-    [_videoAd unloadAdsManager];
+    [self.videoAd unloadAdsManager];
 }
 
 - (void)viewDidUnload {
-    [_videoAd unloadAdsManager];
+    [self.videoAd unloadAdsManager];
     [super viewDidUnload];
 }
 
 - (void)tapitVideoInterstitialAdDidLoad:(TapItVideoInterstitialAd *)videoAd {
     NSLog(@"We received an ad... now show it.");
-    [videoAd playVideoFromAdsManager];
+    [self.videoAd playVideoFromAdsManager];
 }
 
 - (void)tapitVideoInterstitialAdDidFail:(TapItVideoInterstitialAd *)videoAd withErrorString:(NSString *)error {
