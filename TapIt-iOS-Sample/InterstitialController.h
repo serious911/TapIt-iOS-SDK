@@ -1,5 +1,5 @@
 //
-//  SecondViewController.h
+//  InterstitialController.h
 //  TapIt-iOS-Sample
 //
 //  Created by Nick Penteado on 4/11/12.
@@ -10,13 +10,12 @@
 #import <TapIt/TapIt.h>
 
 
-enum {
-    StateNone       = 0,
-    StateLoading    = 1,
-    StateError      = 2,
-    StateReady      = 3,
-};
-typedef NSUInteger ButtonState;
+typedef enum {
+    StateNone = 0,
+    StateLoading,
+    StateError,
+    StateReady,
+} ButtonState;
 
 
 @class TapItInterstitialAd;

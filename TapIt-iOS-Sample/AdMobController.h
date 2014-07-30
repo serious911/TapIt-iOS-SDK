@@ -6,17 +6,15 @@
 //
 //
 
-#import <Foundation/Foundation.h>
 #import "GADBannerViewDelegate.h"
 #import "GADInterstitialDelegate.h"
 
-enum {
-    StateNone       = 0,
-    StateLoading    = 1,
-    StateError      = 2,
-    StateReady      = 3,
-};
-typedef NSUInteger ButtonState;
+typedef enum {
+    StateNone = 0,
+    StateLoading,
+    StateError,
+    StateReady,
+} ButtonState;
 
 @class GADBannerView, GADInterstitial;
 

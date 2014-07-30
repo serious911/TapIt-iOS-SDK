@@ -14,13 +14,6 @@
 @synthesize window = _window;
 @synthesize locationManager;
 
-- (void)dealloc
-{
-    [_window release];
-    locationManager = nil;
-    [super dealloc];
-}
-
 - (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     return YES;
 }
@@ -63,6 +56,13 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     [self.locationManager stopMonitoringSignificantLocationChanges];
+}
+
+- (void)dealloc
+{
+    [_window release];
+    locationManager = nil;
+    [super dealloc];
 }
 
 #pragma mark -

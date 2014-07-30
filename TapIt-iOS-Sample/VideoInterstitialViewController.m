@@ -9,16 +9,16 @@
 #import "VideoInterstitialViewController.h"
 #import <TapIt/TVASTAd.h>
 
-//*************************************
-// Replace with your valid ZoneId here.
-NSString *const kZoneIdVideo         = @"22219";     // 24839, 22219
-@interface VideoInterstitialViewController ()
+// This is the zone id for the InterstitialController example.
+// Go to http://ads.tapit.com/ to get one for your app.
+// Once a zone is created in the system, it may take up to
+// an hour for the zone to be active.
 
-@end
+#define ZONE_ID @"22219" // For example use only; don't use this zone in your app!
 
 @implementation VideoInterstitialViewController
 
-@synthesize videoAd = _videoAd;
+@synthesize videoAd;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,11 +33,17 @@ NSString *const kZoneIdVideo         = @"22219";     // 24839, 22219
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    _videoAd = [[TapItVideoInterstitialAd alloc] init];
-    _videoAd.delegate = self;
+    self.videoAd = [[TapItVideoInterstitialAd alloc] init];
+    self.videoAd.delegate = self;
     
-    //Optional... override the presentingViewController (defaults to the delegate)
-    //_videoAd.presentingViewController = self;
+    // Optional... override the presentingViewController (defaults to the delegate)
+    //self.videoAd.presentingViewController = self;
+}
+
+- (void)viewDidUnload {
+    [self.videoAd unloadAdsManager];
+    self.videoAd.delegate = nil;
+    [super viewDidUnload];
 }
 
 - (void)didReceiveMemoryWarning
@@ -47,31 +53,30 @@ NSString *const kZoneIdVideo         = @"22219";     // 24839, 22219
 }
 
 - (void)requestAds {    
-    // Create an adsRequest object and request ads from the ad server with your own kZoneIdVideo
-    TVASTAdsRequest *request = [TVASTAdsRequest requestWithAdZone:kZoneIdVideo];
-    [_videoAd requestAdsWithRequestObject:request];
+    // Create an adsRequest object and request ads from the ad server with your own ZONE_ID
+    TVASTAdsRequest *request = [TVASTAdsRequest requestWithAdZone:ZONE_ID];
+    [self.videoAd requestAdsWithRequestObject:request];
     
-    //If you want to specify the type of video ad you are requesting, use the call below.
-    //[_videoAd requestAdsWithRequestObject:request andVideoType:TapItVideoTypeMidroll];
+    // If you want to specify the type of video ad you are requesting, use the call below.
+    //[self.videoAd requestAdsWithRequestObject:request andVideoType:TapItVideoTypeMidroll];
 }
 
 - (IBAction)onRequestAds {
     [self requestAds];
 }
 
+#pragma mark -
+#pragma mark TapItVideoInterstitialAdDelegate methods
+
 - (void)tapitVideoInterstitialAdDidFinish:(TapItVideoInterstitialAd *)videoAd {
     NSLog(@"Override point for resuming your app's content.");
-    [_videoAd unloadAdsManager];
+    [self.videoAd unloadAdsManager];
 }
 
-- (void)viewDidUnload {
-    [_videoAd unloadAdsManager];
-    [super viewDidUnload];
-}
 
 - (void)tapitVideoInterstitialAdDidLoad:(TapItVideoInterstitialAd *)videoAd {
     NSLog(@"We received an ad... now show it.");
-    [videoAd playVideoFromAdsManager];
+    [self.videoAd playVideoFromAdsManager];
 }
 
 - (void)tapitVideoInterstitialAdDidFail:(TapItVideoInterstitialAd *)videoAd withErrorString:(NSString *)error {

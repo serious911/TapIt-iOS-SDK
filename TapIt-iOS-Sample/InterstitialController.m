@@ -1,5 +1,5 @@
 //
-//  SecondViewController.m
+//  InterstitialController.m
 //  TapIt-iOS-Sample
 //
 //  Created by Nick Penteado on 4/11/12.
@@ -10,20 +10,16 @@
 #import "InterstitialController.h"
 
 
-// This is the zone id for the Interstitial Example
-// go to http://ads.tapit.com/ to get your's
-#define ZONE_ID @"7271"
+// This is the zone id for the InterstitialController example.
+// Go to http://ads.tapit.com/ to get one for your app.
+// Once a zone is created in the system, it may take up to
+// an hour for the zone to be active.
 
-@interface InterstitialController ()
-
-@end
+#define ZONE_ID @"7271" // For example use only; don't use this zone in your app!
 
 @implementation InterstitialController
 
-@synthesize activityIndicator;
-@synthesize loadButton;
-@synthesize showButton;
-@synthesize interstitialAd;
+@synthesize activityIndicator, loadButton, showButton, interstitialAd;
 
 - (void)viewDidLoad
 {
@@ -58,7 +54,7 @@
     self.interstitialAd.delegate = self;
     self.interstitialAd.animated = YES;
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:  
-//                            @"test", @"mode", // enable test mode to test banner ads in your app
+//                            @"test", @"mode", // Enable test mode to test banner ads in your app
                             nil];
     TapItRequest *request = [TapItRequest requestWithAdZone:ZONE_ID andCustomParameters:params];
     AppDelegate *myAppDelegate = (AppDelegate *)([[UIApplication sharedApplication] delegate]);

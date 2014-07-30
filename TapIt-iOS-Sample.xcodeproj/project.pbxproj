@@ -257,10 +257,10 @@
 				CD0A88681979992200073718 /* BannerAdController.m */,
 				CD0A88801979992200073718 /* InterstitialController.h */,
 				CD0A88811979992200073718 /* InterstitialController.m */,
-				CD0A88871979992200073718 /* VideoInterstitialViewController.h */,
-				CD0A88881979992200073718 /* VideoInterstitialViewController.m */,
 				CD0A88631979992200073718 /* AdMobController.h */,
 				CD0A88641979992200073718 /* AdMobController.m */,
+				CD0A88871979992200073718 /* VideoInterstitialViewController.h */,
+				CD0A88881979992200073718 /* VideoInterstitialViewController.m */,
 				CD0A88DE1979A13000073718 /* Images */,
 				CD0A883B197998E000073718 /* Supporting Files */,
 			);
@@ -342,11 +342,11 @@
 				CD0A88781979992200073718 /* first@2x.png */,
 				CD0A88791979992200073718 /* fourth.png */,
 				CD0A887A1979992200073718 /* icon.png */,
-				CD0A887B1979992200073718 /* icon@2x.png */,
-				CD0A887C1979992200073718 /* icon29x29.png */,
-				CD0A887D1979992200073718 /* icon58x58.png */,
 				CD0A887E1979992200073718 /* icon114x114.png */,
 				CD0A887F1979992200073718 /* icon144x144.png */,
+				CD0A887C1979992200073718 /* icon29x29.png */,
+				CD0A887D1979992200073718 /* icon58x58.png */,
+				CD0A887B1979992200073718 /* icon@2x.png */,
 				CD0A88821979992200073718 /* pause.png */,
 				CD0A88831979992200073718 /* play.png */,
 				CD0A88841979992200073718 /* second.png */,
@@ -726,6 +726,7 @@
 				CD0A885F197998E000073718 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CD0A8860197998E000073718 /* Build configuration list for PBXNativeTarget "TapIt-iOS-SampleTests" */ = {
 			isa = XCConfigurationList;
@@ -734,6 +735,7 @@
 				CD0A8862197998E000073718 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

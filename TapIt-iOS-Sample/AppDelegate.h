@@ -11,7 +11,7 @@
 
 //// Include this file in your App Delegate if you're not using AdMob,
 //// but are getting AdMob related errors during compile time
-//#import "TapItAdMobStubs.h"
+//#import <TapIt/TapItAdMobStubs.h>
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, CLLocationManagerDelegate>
 
