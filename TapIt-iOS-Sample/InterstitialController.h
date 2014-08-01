@@ -17,9 +17,6 @@ typedef enum {
     StateReady,
 } ButtonState;
 
-
-@class TapItInterstitialAd;
-
 @interface InterstitialController : UIViewController <TapItInterstitialAdDelegate>
 
 @property (retain, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;

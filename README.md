@@ -50,7 +50,7 @@ Banner Usage
 ------------
 ````objective-c
 // in your .h file
-@class TapItBannerAdView; // forward class declaration
+#import <TapIt/TapItBannerAdView.h>
 
 @property (retain, nonatomic) TapItBannerAdView *tapitAd;
 
@@ -64,7 +64,7 @@ self.tapitAd = [[TapItBannerAdView alloc] initWithFrame:CGRectMake(0, 0, 320, 50
 [self.view addSubview:self.tapitAd];
 
 // kick off banner rotation!
-[self.tapitAd startServingAdsForRequest:[TapItRequest requestWithAdZone:@"YOUR ZONE ID"]];
+[self.tapitAd startServingAdsForRequest:[TapItRequest requestWithAdZone:@"*YOUR ZONE ID*"]];
 
 ...
 
@@ -75,53 +75,23 @@ self.tapitAd = [[TapItBannerAdView alloc] initWithFrame:CGRectMake(0, 0, 320, 50
 
 For a complete example, see https://github.com/tapit/TapIt-iOS-SDK/blob/master/TapIt-iOS-Sample/BannerAdController.m
 
-
-Listen for location updates
----------------------------
-If you want to allow for geo-targeting, listen for location updates:
-````objective-c
-@property (retain, nonatomic) CLLocationManager *locationManager;
-
-...
-
-// start listening for location updates
-self.locationManager = [[CLLocationManager alloc] init];
-self.locationManager.delegate = self;
-[self.locationManager startMonitoringSignificantLocationChanges];
-
-...
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
-    // Notify the TapIt! banner when the location changes.  New location will be used the next time an ad is requested
-    [self.tapitAd updateLocation:newLocation];
-}
-
-...
-
-// Stop monitoring location when done to conserve battery life
-[self.locationManager stopMonitoringSignificantLocationChanges];
-````
-
-
-
 Interstitial Usage
 ------------------
 Show modally
 ````objective-c
 // in your .h file
-@class TapItInterstitialAd; // forward class declaration
+#import <TapIt/TapIt.h>
 ...
 @property (retain, nonatomic) TapItInterstitialAd *interstitialAd;
 
 ...
 
 // in your .m file
-#import <TapIt/TapIt.h>
-...
+
 // init and load interstitial
 self.interstitialAd = [[[TapItInterstitialAd alloc] init] autorelease];
 self.interstitialAd.delegate = self; // notify me of the interstitial's state changes
-TapItRequest *request = [TapItRequest requestWithAdZone:@"YOUR ZONE ID"];
+TapItRequest *request = [TapItRequest requestWithAdZone:@"*YOUR ZONE ID*"];
 [self.interstitialAd loadInterstitialForRequest:request];
 
 ...
@@ -142,7 +112,7 @@ Include in paged navigation
 
 // init and load interstitial
 self.interstitialAd = [[[TapItInterstitialAd alloc] init] autorelease];
-TapItRequest *request = [TapItRequest requestWithAdZone:@"YOUR ZONE ID"];
+TapItRequest *request = [TapItRequest requestWithAdZone:@"*YOUR ZONE ID*"];
 [self.interstitialAd loadInterstitialForRequest:request];
 
 ...
@@ -153,18 +123,10 @@ if( self.interstitialAd.isLoaded ) {
 }
 ````
 
-
-
-Delegate Callbacks
-------------------
-TapIt! ad units follow the delegate pattern to notify your app of state changes.
-
-
-
 Video Ads Usage
 ----------------
 
-For sample video ads integration code, please see the VideoInterstitialViewController.m and VideoInterstitialViewController.m
+For sample video ads integration code, please see the VideoInterstitialViewController.h and VideoInterstitialViewController.m
 files for working example of video ads in an app.  You can find VideoInterstitialViewController in the 
 TapIt-iOS-Sample directory of the iOS SDK package.
 
@@ -192,8 +154,10 @@ Note: the following uses Automatic Reference Counting so there will not be any o
     self.videoAd = [[TapItVideoInterstitialAd alloc] init];
     self.videoAd.delegate = self;
     
-    //Optional... override the presentingViewController (defaults to the delegate)
-    //self.videoAd.presentingViewController = self;
+    // Optional... override the presentingViewController (defaults to the delegate)
+    //self.videoAd.presentingViewController = self;        
+
+    [self requestAds];
 }
 
 - (void)requestAds {    
@@ -203,10 +167,6 @@ Note: the following uses Automatic Reference Counting so there will not be any o
     
     //If you want to specify the type of video ad you are requesting, use the call below.
     //[self.videoAd requestAdsWithRequestObject:request andVideoType:TapItVideoTypeMidroll];
-}
-
-- (IBAction)onRequestAds {
-    [self requestAds];
 }
 
 - (void)tapitVideoInterstitialAdDidFinish:(TapItVideoInterstitialAd *)videoAd {
@@ -227,4 +187,53 @@ Note: the following uses Automatic Reference Counting so there will not be any o
 - (void)tapitVideoInterstitialAdDidFail:(TapItVideoInterstitialAd *)videoAd withErrorString:(NSString *)error {
     NSLog(@"%@", error);
 }
+````
+
+Listen for location updates
+---------------------------
+If you want to allow for geo-targeting, listen for location updates in your AppDelegate:
+````objective-c
+@property (retain, nonatomic) CLLocationManager *locationManager;
+
+...
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+	TapItAppTracker *appTracker = [TapItAppTracker sharedAppTracker];
+    [appTracker reportApplicationOpen];
+	// start listening for location updates
+	self.locationManager = [[CLLocationManager alloc] init];
+	self.locationManager.delegate = self;
+	[self.locationManager startMonitoringSignificantLocationChanges];
+}
+...
+
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
+	// Stop monitoring location when done to conserve battery life
+	[self.locationManager stopMonitoringSignificantLocationChanges];
+}
+...
+
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [self.locationManager startMonitoringSignificantLocationChanges];
+}
+...
+
+- (void)applicationWillTerminate:(UIApplication *)application
+{
+    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [self.locationManager stopMonitoringSignificantLocationChanges];
+}
+...
+
+````
+
+Then, in your ad request, do the following:
+````objective-c
+	TapItRequest *request = [TapItRequest requestWithAdZone:*YOUR ZONE ID*];
+	AppDelegate *myAppDelegate = (AppDelegate *)([[UIApplication sharedApplication] delegate]);
+    [request updateLocation:myAppDelegate.locationManager.location];
+    
 ````
