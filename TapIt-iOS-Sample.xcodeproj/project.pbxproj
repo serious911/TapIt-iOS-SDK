@@ -634,12 +634,14 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TapIt-iOS-Sample/TapIt-iOS-Sample-Prefix.pch";
 				INFOPLIST_FILE = "TapIt-iOS-Sample/TapIt-iOS-Sample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/GoogleAdMobAdsSDK",
 				);
 				OTHER_LDFLAGS = " -all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -657,12 +659,14 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TapIt-iOS-Sample/TapIt-iOS-Sample-Prefix.pch";
 				INFOPLIST_FILE = "TapIt-iOS-Sample/TapIt-iOS-Sample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/GoogleAdMobAdsSDK",
 				);
 				OTHER_LDFLAGS = " -all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

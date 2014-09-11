@@ -16,3 +16,6 @@
  * Removed dependency on JSONKit
  * Updated Reachability
  * Updated conversion tracking
+ 
+##Version 3.0.15 (Tuesday, September 16, 2014)
+ * Improved MRAID 2.0 functionality

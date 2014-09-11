@@ -1,3 +1,7 @@
+function isInteger(x) {
+    return (typeof x === 'number') && (x % 1 === 0);
+}
+
 var mraid = {
     getState: function() {return "loading"},
     listeners: [],
@@ -30,12 +34,16 @@ var mraid = {
         isVisible: false,
         state: "loading", // "loading", "default", "expanded", "resized", or "hidden"
         height: false,
-        width: false
+        width: false,
+        screenWidth: false,
+        screenHeight: false,
+        x: false,
+        y: false
     };
 
     mraid.getVersion = function() { console.debug("getVersion"); return "2.0"; };
 
-    mraid.getPlacementType = function() { console.debug("getPlacement"); return nativeExecute("getPlacementType"); };
+    mraid.getPlacementType = function() { console.debug("getPlacement"); return nativeData.placementType; };
 
     mraid.getState = function() { console.debug("getState: " + nativeData.state); return nativeData.state; };
 
@@ -102,8 +110,8 @@ var mraid = {
     mraid.getExpandProperties = function() {
         console.debug("getExpandProperties");
         if(!expandProperties.width) {
-            expandProperties.width = nativeData.width;
-            expandProperties.height = nativeData.height;
+            expandProperties.width = nativeData.screenWidth;
+            expandProperties.height = nativeData.screenHeight;
         }
 
         return {
@@ -227,31 +235,27 @@ var mraid = {
      * MRAID 2.0 functionality
      ***********************************************/
 
-    var screenSize = {
-        width:0,
-        height:0
-    };
     var defaultPosition = {
         x:0,
         y:0,
         width:0,
         height:0
     };
-    var currentPosition = {
-        x:0,
-        y:0,
-        width:0,
-        height:0
-    };
+//    var currentPosition = {
+//        x:0,
+//        y:0,
+//        width:0,
+//        height:0
+//    };
     var orientationProperties = {
         allowOrientationChange : true,
         forceOrientation : "none" // portrait, landscape, none
     };
     var resizeProperties = {
-        width : 0,
-        height : 0,
-        offsetX : 0,
-        offsetY : 0,
+        width : false,
+        height : false,
+        offsetX : false,
+        offsetY : false,
         customClosePosition : "top-right", // "top-left", "top-right", "center", "bottom-left", "bottom-right," "top-center," or "bottom-center"
         allowOffscreen : false
     };
@@ -267,21 +271,37 @@ var mraid = {
     mraid.getCurrentPosition = function() {
         console.debug("getCurrentPosition");
         return {
-            x: currentPosition.x,
-            y: currentPosition.y,
-            width: currentPosition.width,
-            height: currentPosition.height
+            x: nativeData.x,
+            y: nativeData.y,
+            width: nativeData.width,
+            height: nativeData.height
         };
     };
  
      mraid.setCurrentPosition = function(position) {
-        var previousSize = mraid.getScreenSize();
+        var previousSize = mraid.getCurrentPosition();
         console.debug("setCurrentPosition");
         console.debug(previousSize.height);
         console.debug(previousSize.width);
-        currentPosition = position;
-        screenSize = { width:currentPosition.width, height:currentPosition.height };
-        var currentSize = mraid.getScreenSize();
+        //currentPosition = position;
+        if("x" in position) {
+            nativeData.x = position.x;
+            defaultPosition.x = position.x;
+        }
+        if("y" in position) {
+            nativeData.y = position.y;
+            defaultPosition.y = position.y;
+        }
+        if("height" in position) {
+            nativeData.height = position.height;
+            defaultPosition.height = position.height;
+        }
+        if("width" in position) {
+            nativeData.width = position.width;
+            defaultPosition.width = position.width;
+        }
+ 
+        var currentSize = mraid.getCurrentPosition();
         console.debug(currentSize.height);
         console.debug(currentSize.width);
          // Only send the size changed event if the size in the position
@@ -292,8 +312,8 @@ var mraid = {
          
          var handlers = listeners["sizeChange"];
          if (handlers) {
-            var width = currentPosition.width;
-            var height = currentPosition.height;
+            var width = nativeData.width;
+            var height = nativeData.height;
          
             for (var i = 0; i < handlers.length; ++i) {
                 handlers[i](width, height);
@@ -313,8 +333,8 @@ var mraid = {
     mraid.getScreenSize = function() {
         console.debug("getScreenSize");
         return {
-            width: screenSize.width,
-            height: screenSize.height
+            width: nativeData.screenWidth,
+            height: nativeData.screenHeight
         };
     };
 
@@ -351,25 +371,55 @@ var mraid = {
     }
     mraid.getResizeProperties = function() {
         console.debug("getResizeProperties");
-        return resizeProperties;
+        if(resizeProperties.width == false || resizeProperties.height == false) {
+            mraid.fireErrorEvent("Can't get resize properties for frame without setting resize properties first", "getResizeProperties");
+        } else {
+            return resizeProperties;
+        }
     };
     mraid.playVideo = function(url) {
         console.debug("playVideo");
         nativeExecute("playVideo", {url:url}, undefined);
     };
-    mraid.resize = function() { console.debug("resize"); };
+    mraid.resize = function() {
+        console.debug("resize");
+        var currentState = mraid.getState();
+        if(currentState == "expanded") {
+            var message = "Can't resize an expanded ad unit";
+            var action = "resize";
+            fireEvent("error", [message, action]);
+        } else {
+            nativeData.height = resizeProperties.height;
+            nativeData.width = resizeProperties.width;
+            nativeData.state = "resized";
+            nativeExecute("resize", {width:nativeData.width, height:nativeData.height});
+        }
+   };
     mraid.setResizeProperties = function(props) {
-        console.debug("setResizeProperties");
-        resizeProperties = {
-            width : props.width,
-            height : props.height,
-            offsetX : props.offsetX,
-            offsetY : props.offsetY,
-            customClosePosition : props.customClosePosition,
-            allowOffscreen : props.allowOffscreen
-         };
+        console.debug("setResizeProperties " + props.height + " " + props.width + " " + props.offsetX + " " + props.offsetY + " " + props.allowOffscreen.toString());
+        if((!isInteger(props.height) || !isInteger(props.width) || !isInteger(props.offsetX) || !isInteger(props.offsetY)) || (props.height <= 50 &&  props.width <= 50) || (props.height > maxSize.height || props.width > maxSize.width)) {
+           resizeProperties = {
+             width : false,
+             height : false,
+             offsetX : false,
+             offsetY : false,
+             customClosePosition : "top-right", // "top-left", "top-right", "center", "bottom-left", "bottom-right," "top-center," or "bottom-center"
+             allowOffscreen : false
+           };
+           mraid.fireErrorEvent("Invalid data passed to resize properties", "setResizeProperties");
+        } else {
  
+            resizeProperties = {
+                width : props.width,
+                height : props.height,
+                offsetX : props.offsetX,
+                offsetY : props.offsetY,
+                customClosePosition : props.customClosePosition,
+                allowOffscreen : props.allowOffscreen
+            };
+        }
     };
+ 
     mraid.storePicture = function(url) {
         console.debug("storePicture");
         nativeExecute("storePicture", {url:url}, undefined);
@@ -377,7 +427,7 @@ var mraid = {
 
      var FEATURES = mraid.FEATURES = {
      SMS             :"sms",
-     PHONE           :"phone",
+     PHONE           :"tel",
      CALENDAR        :"calendar",
      STORE_PICTURE   :"storePicture",
      INLINE_VIDEO    :"inlineVideo"
