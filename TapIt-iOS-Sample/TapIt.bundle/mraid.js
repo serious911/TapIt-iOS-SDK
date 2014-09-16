@@ -408,14 +408,19 @@ var mraid = {
            };
            mraid.fireErrorEvent("Invalid data passed to resize properties", "setResizeProperties");
         } else {
- 
+            var shouldBeOffscreen;
+            if(props.allowOffscreen) {
+               shouldBeOffscreen = props.allowOffscreen;
+            } else {
+               shouldBeOffscreen = false;
+            }
             resizeProperties = {
                 width : props.width,
                 height : props.height,
                 offsetX : props.offsetX,
                 offsetY : props.offsetY,
                 customClosePosition : props.customClosePosition,
-                allowOffscreen : props.allowOffscreen
+                allowOffscreen : shouldBeOffscreen
             };
         }
     };
