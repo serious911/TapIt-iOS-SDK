@@ -3,14 +3,14 @@
 //  TapIt iOS SDK
 //
 //  Created by Nick Penteado on 4/13/12.
-//  Updated by Carl Zornes on 10/24/13.
+//  Updated by Carl Zornes on 12/12/14.
 //  Copyright (c) 2013 TapIt!. All rights reserved.
 //
 
 #ifndef TapIt_iOS_Sample_TapItConstants_h
 #define TapIt_iOS_Sample_TapItConstants_h
 
-#define TAPIT_VERSION @"3.0.15"
+#define TAPIT_VERSION @"3.1"
 
 /**
  `TapItAdType` defines the available ad types for interstitial ads.
