@@ -19,3 +19,6 @@
  
 ##Version 3.0.15 (Tuesday, September 16, 2014)
  * Improved MRAID 2.0 functionality
+
+##Version 3.1 (Tuesday, December 23, 2014)
+* Native Ad support

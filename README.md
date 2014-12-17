@@ -1,7 +1,7 @@
 TapIt iOS SDK
 =============
 
-Version 3.0.15
+Version 3.1
 
 This is the iOS SDK for the TapIt! mobile ad network.  Go to http://tapit.com/ for more details and to sign up.
 
@@ -189,8 +189,67 @@ Note: the following uses Automatic Reference Counting so there will not be any o
 }
 ````
 
+Native Ad Usage
+----------------
+
+````objective-c
+// in your .h file
+#import <TapIt/TapItNativeAdManager.h>
+
+@interface MyViewController : UIViewController <TapItNativeAdDelegate>
+
+@property (nonatomic, retain) TapItNativeAdManager *adManagerNative;
+...
+
+// in your .m file
+#import <TapIt/TapIt.h>
+...
+adManagerNative = [[TapItNativeAdManager alloc] init];
+adManagerNative.delegate = self;
+TapItRequest *request = [TapItRequest requestWithAdZone:*YOUR ZONE ID* andCustomParameters:params];
+[adManagerNative getAdsForRequest:request withRequestedNumberOfAds:10];
+...
+
+- (void)tapitNativeAdManagerDidLoad:(TapItNativeAdManager *)nativeAdManager {
+    TapItNativeAd *newAd = [nativeAdManager.allNativeAds objectAtIndex:0];
+
+    // Get data from `newAd` and add fields to your view
+    ...
+    UILabel *titleLabel = [[UILabel alloc] init];
+    [titleLabel setFrame:CGRectMake(10,50,300,20)];
+    titleLabel.backgroundColor=[UIColor clearColor];
+    titleLabel.textColor=[UIColor blackColor];
+    titleLabel.userInteractionEnabled=YES;
+    titleLabel.text = newAd.adTitle;
+    [self.view addSubview:titleLabel];
+    [titleLabel release];
+    ...
+
+    // Add a touch recognizer to native element(s) to enable landing page access
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelTapped)];
+    tapGestureRecognizer.numberOfTapsRequired = 1;
+    [titleLabel addGestureRecognizer:tapGestureRecognizer];
+    // Log the native ad impression
+
+    [nativeAdManager logNativeAdImpression:newAd];
+}
+
+- (void)labelTapped {
+    TapItNativeAd *newAd = [adManagerNative.allNativeAds objectAtIndex:0];
+    [adManagerNative nativeAdWasTouched:newAd];
+}
+
+- (void)tapitNativeAdManager:(TapItNativeAdManager *)nativeAdManager didFailToReceiveAdWithError:(NSError *)error {
+    NSLog(@"Native Ad Manager failed to load with the following error: %@", error.localizedDescription);
+}
+...
+````
+
+For a complete example, see https://github.com/tapit/TapIt-iOS-SDK/blob/master/TapIt-iOS-Sample/NativeAdController.m
+
 Listen for location updates
 ---------------------------
+
 If you want to allow for geo-targeting, listen for location updates in your AppDelegate:
 ````objective-c
 @property (retain, nonatomic) CLLocationManager *locationManager;
