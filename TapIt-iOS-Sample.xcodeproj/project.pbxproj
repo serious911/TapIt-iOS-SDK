@@ -67,6 +67,7 @@
 		CD0A88E01979A21E00073718 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CD0A88DF1979A21E00073718 /* README.md */; };
 		CD0A88E21979A28000073718 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = CD0A88E11979A28000073718 /* CHANGELOG.md */; };
 		CD6C173D1A41FB44009FA29E /* TapItMediationAdMob.m in Sources */ = {isa = PBXBuildFile; fileRef = CD6C173C1A41FB44009FA29E /* TapItMediationAdMob.m */; };
+		CD6C17401A42064A009FA29E /* NativeAdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD6C173F1A42064A009FA29E /* NativeAdViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -161,6 +162,8 @@
 		CD0A88E11979A28000073718 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG.md; sourceTree = "<group>"; };
 		CD6C173B1A41FB44009FA29E /* TapItMediationAdMob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapItMediationAdMob.h; sourceTree = "<group>"; };
 		CD6C173C1A41FB44009FA29E /* TapItMediationAdMob.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapItMediationAdMob.m; sourceTree = "<group>"; };
+		CD6C173E1A42064A009FA29E /* NativeAdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeAdViewController.h; sourceTree = "<group>"; };
+		CD6C173F1A42064A009FA29E /* NativeAdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NativeAdViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -263,6 +266,8 @@
 				CD0A88631979992200073718 /* AdMobController.h */,
 				CD0A88641979992200073718 /* AdMobController.m */,
 				CD0A88871979992200073718 /* VideoInterstitialViewController.h */,
+				CD6C173E1A42064A009FA29E /* NativeAdViewController.h */,
+				CD6C173F1A42064A009FA29E /* NativeAdViewController.m */,
 				CD0A88881979992200073718 /* VideoInterstitialViewController.m */,
 				CD0A88DE1979A13000073718 /* Images */,
 				CD0A883B197998E000073718 /* Supporting Files */,
@@ -491,6 +496,7 @@
 				CD0A8841197998E000073718 /* main.m in Sources */,
 				CD0A88891979992200073718 /* AdMobController.m in Sources */,
 				CD0A888B1979992200073718 /* BannerAdController.m in Sources */,
+				CD6C17401A42064A009FA29E /* NativeAdViewController.m in Sources */,
 				CD0A888A1979992200073718 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
