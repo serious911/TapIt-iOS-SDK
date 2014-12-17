@@ -66,6 +66,7 @@
 		CD0A88DD1979A06200073718 /* TapIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD0A88DC1979A06200073718 /* TapIt.framework */; };
 		CD0A88E01979A21E00073718 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CD0A88DF1979A21E00073718 /* README.md */; };
 		CD0A88E21979A28000073718 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = CD0A88E11979A28000073718 /* CHANGELOG.md */; };
+		CD6C173D1A41FB44009FA29E /* TapItMediationAdMob.m in Sources */ = {isa = PBXBuildFile; fileRef = CD6C173C1A41FB44009FA29E /* TapItMediationAdMob.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -158,6 +159,8 @@
 		CD0A88DC1979A06200073718 /* TapIt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TapIt.framework; path = "TapIt-iOS-Sample/TapIt.framework"; sourceTree = "<group>"; };
 		CD0A88DF1979A21E00073718 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		CD0A88E11979A28000073718 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG.md; sourceTree = "<group>"; };
+		CD6C173B1A41FB44009FA29E /* TapItMediationAdMob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapItMediationAdMob.h; sourceTree = "<group>"; };
+		CD6C173C1A41FB44009FA29E /* TapItMediationAdMob.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapItMediationAdMob.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -270,6 +273,8 @@
 		CD0A883B197998E000073718 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CD6C173B1A41FB44009FA29E /* TapItMediationAdMob.h */,
+				CD6C173C1A41FB44009FA29E /* TapItMediationAdMob.m */,
 				CD0A883C197998E000073718 /* TapIt-iOS-Sample-Info.plist */,
 				CD0A883D197998E000073718 /* InfoPlist.strings */,
 				CD0A8840197998E000073718 /* main.m */,
@@ -482,6 +487,7 @@
 			files = (
 				CD0A88A51979992200073718 /* VideoInterstitialViewController.m in Sources */,
 				CD0A889F1979992200073718 /* InterstitialController.m in Sources */,
+				CD6C173D1A41FB44009FA29E /* TapItMediationAdMob.m in Sources */,
 				CD0A8841197998E000073718 /* main.m in Sources */,
 				CD0A88891979992200073718 /* AdMobController.m in Sources */,
 				CD0A888B1979992200073718 /* BannerAdController.m in Sources */,
