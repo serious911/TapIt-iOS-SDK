@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="4">
     <dependencies>
-        <deployment version="1280" defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <deployment version="1280" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
-        <!--Banner Ad Controller - Banners-->
+        <!--Banners-->
         <scene sceneID="11">
             <objects>
                 <viewController id="2" customClass="BannerAdController" sceneMemberID="viewController">
@@ -48,7 +48,7 @@
             </objects>
             <point key="canvasLocation" x="3041" y="150"/>
         </scene>
-        <!--Video Interstitial View Controller - Video-->
+        <!--Video-->
         <scene sceneID="HoP-JD-Vvc">
             <objects>
                 <viewController id="hMg-ub-Xhq" customClass="VideoInterstitialViewController" sceneMemberID="viewController">
@@ -78,7 +78,7 @@
             </objects>
             <point key="canvasLocation" x="2034" y="2639"/>
         </scene>
-        <!--Ad Mob Controller - Ad Mob-->
+        <!--Ad Mob-->
         <scene sceneID="hFr-b6-XMf">
             <objects>
                 <viewController id="XMr-KD-gbP" customClass="AdMobController" sceneMemberID="viewController">
@@ -119,7 +119,7 @@
             </objects>
             <point key="canvasLocation" x="4048" y="2438"/>
         </scene>
-        <!--Interstitial Controller - Interstitials-->
+        <!--Interstitials-->
         <scene sceneID="13">
             <objects>
                 <viewController id="3" customClass="InterstitialController" sceneMemberID="viewController">
@@ -187,15 +187,32 @@
                         <segue destination="3" kind="relationship" relationship="viewControllers" id="28"/>
                         <segue destination="XMr-KD-gbP" kind="relationship" relationship="viewControllers" id="SCF-hC-7zv"/>
                         <segue destination="hMg-ub-Xhq" kind="relationship" relationship="viewControllers" id="h39-NP-cq5"/>
+                        <segue destination="sDi-fi-xg3" kind="relationship" relationship="viewControllers" id="UHT-3Y-9u7"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="14" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1903" y="1394"/>
         </scene>
+        <!--Native-->
+        <scene sceneID="Hk0-cK-Hg2">
+            <objects>
+                <viewController id="sDi-fi-xg3" customClass="NativeAdViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bqv-kN-nmB">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Native" image="fourth.png" id="eb1-67-TNT"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cdi-uz-ect" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="378" y="779"/>
+        </scene>
     </scenes>
     <resources>
         <image name="first.png" width="30" height="30"/>
+        <image name="fourth.png" width="24" height="16"/>
         <image name="second.png" width="30" height="30"/>
         <image name="third.png" width="22" height="22"/>
     </resources>

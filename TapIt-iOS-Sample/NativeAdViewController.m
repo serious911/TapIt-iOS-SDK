@@ -9,7 +9,7 @@
 #import "NativeAdViewController.h"
 #import "AppDelegate.h"
 
-#define ZONE_ID @"7268" // for example use only, don't use this zone in your app!
+#define ZONE_ID @"63283" // for example use only, don't use this zone in your app!
 @interface NativeAdViewController ()
 
 @end
@@ -32,23 +32,15 @@
                             nil];
     
     TapItRequest *request = [TapItRequest requestWithAdZone:ZONE_ID andCustomParameters:params];
-    [tiNativeManager getAdsForRequest:request withRequestedNumberOfAds:10];
+    [tiNativeManager getAdsForRequest:request withRequestedNumberOfAds:1];
 }
 
 - (void)labelTapped {
     [tiNativeManager nativeAdWasTouched:[tiNativeManager.allNativeAds objectAtIndex:0]];
 }
 
-#pragma mark -
-#pragma mark TapItNativeAdDelegate methods
-
-- (void)tapitNativeAdManagerWillLoadAd:(TapItNativeAdManager *)nativeAdManager {
-    NSLog(@"Native Ad Manager is about to check server for ad...");
-}
-
-- (void)tapitNativeAdManagerDidLoad:(TapItNativeAdManager *)nativeAdManager {
-    NSLog(@"Native Ad Manager has been loaded...");
-    TapItNativeAd *newAd = [nativeAdManager.allNativeAds objectAtIndex:0];
+- (void)showNativeAd {
+    TapItNativeAd *newAd = [tiNativeManager.allNativeAds objectAtIndex:0];
     
     UILabel *titleLabel = [[UILabel alloc] init];
     [titleLabel setFrame:CGRectMake(10,50,300,20)];
@@ -77,9 +69,18 @@
     [webview loadHTMLString:newAd.adHTML baseURL:nil];
     [self.view addSubview:webview];
     
-    [nativeAdManager logNativeAdImpression:newAd];
-    
-    NSLog(@"Number of ads: %lu with the first ad's title: %@", (unsigned long)[nativeAdManager.allNativeAds count], newAd.adTitle);
+    [tiNativeManager logNativeAdImpression:newAd];
+}
+#pragma mark -
+#pragma mark TapItNativeAdDelegate methods
+
+- (void)tapitNativeAdManagerWillLoadAd:(TapItNativeAdManager *)nativeAdManager {
+    NSLog(@"Native Ad Manager is about to check server for ad...");
+}
+
+- (void)tapitNativeAdManagerDidLoad:(TapItNativeAdManager *)nativeAdManager {
+    NSLog(@"Native Ad Manager has loaded %lu ad(s).", (unsigned long)[nativeAdManager.allNativeAds count]);
+    [self showNativeAd];
 }
 
 - (void)tapitNativeAdManager:(TapItNativeAdManager *)nativeAdManager didFailToReceiveAdWithError:(NSError *)error {
