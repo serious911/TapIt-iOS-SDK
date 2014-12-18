@@ -92,7 +92,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSIndexPath *newIP = [NSIndexPath indexPathForItem:7 inSection:0];
     if([indexPath isEqual:newIP]) {
-        //We are now at the correct row. If there is a native ad in the array, then allow it to click through.
+        //We are now at row containing the native ad. If there is an ad here, then allow it to click through.
         if([tiNativeManager.allNativeAds count] > 0) {
             [tiNativeManager nativeAdWasTouched:[tiNativeManager.allNativeAds objectAtIndex:0]];
         }
