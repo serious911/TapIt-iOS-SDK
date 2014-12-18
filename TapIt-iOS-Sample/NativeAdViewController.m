@@ -56,7 +56,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:nativeTableCell];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nativeTableCell];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nativeTableCell];
     }
     
     NSIndexPath *newIP = [NSIndexPath indexPathForItem:7 inSection:0];
@@ -66,24 +66,23 @@
         if([tiNativeManager.allNativeAds count] > 0) {
             TapItNativeAd *newAd = [tiNativeManager.allNativeAds objectAtIndex:0];
             cell.textLabel.text = newAd.adTitle;
-            
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-                NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:newAd.adIconURL]];
-                
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    // Update the UI
-                    cell.imageView.image = [UIImage imageWithData:imageData];
-                    //                CGFloat widthScale = 112/cell.imageView.image.size.width;
-                    //                CGFloat heightScale = 84/cell.imageView.image.size.height;
-                    //                //this line will do it!
-                    //                cell.imageView.transform = CGAffineTransformMakeScale(widthScale, heightScale);
-                    [cell setNeedsLayout];
+            cell.detailTextLabel.textColor = [UIColor lightGrayColor];
+            cell.detailTextLabel.text = @"ADVERTISEMENT";
+            if(newAd.adIconURL) {
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+                    NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:newAd.adIconURL]];
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        // Update the UI
+                        cell.imageView.image = [UIImage imageWithData:imageData];
+                        [cell setNeedsLayout];
+                    });
                 });
-            });
-            
+            }
             [tiNativeManager logNativeAdImpression:newAd];
         }
     } else {
+        cell.imageView.image = [UIImage imageNamed:@"pw.jpg"];
         cell.textLabel.text = [offices objectAtIndex:indexPath.row];
     }
     

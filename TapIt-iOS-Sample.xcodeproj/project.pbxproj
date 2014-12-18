@@ -68,6 +68,7 @@
 		CD0A88E21979A28000073718 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = CD0A88E11979A28000073718 /* CHANGELOG.md */; };
 		CD6C173D1A41FB44009FA29E /* TapItMediationAdMob.m in Sources */ = {isa = PBXBuildFile; fileRef = CD6C173C1A41FB44009FA29E /* TapItMediationAdMob.m */; };
 		CD6C17401A42064A009FA29E /* NativeAdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD6C173F1A42064A009FA29E /* NativeAdViewController.m */; };
+		CD6C17461A4374FA009FA29E /* pw.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CD6C17451A4374FA009FA29E /* pw.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -164,6 +165,7 @@
 		CD6C173C1A41FB44009FA29E /* TapItMediationAdMob.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapItMediationAdMob.m; sourceTree = "<group>"; };
 		CD6C173E1A42064A009FA29E /* NativeAdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeAdViewController.h; sourceTree = "<group>"; };
 		CD6C173F1A42064A009FA29E /* NativeAdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NativeAdViewController.m; sourceTree = "<group>"; };
+		CD6C17451A4374FA009FA29E /* pw.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pw.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -341,6 +343,7 @@
 		CD0A88DE1979A13000073718 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				CD6C17451A4374FA009FA29E /* pw.jpg */,
 				CD0A88691979992200073718 /* Default-568h@2x.png */,
 				CD0A886A1979992200073718 /* Default-Landscape@2x~ipad.png */,
 				CD0A886B1979992200073718 /* Default-Landscape~ipad.png */,
@@ -456,6 +459,7 @@
 				CD0A88B81979996500073718 /* README.txt in Resources */,
 				CD0A88951979992200073718 /* MainStoryboard_iPhone.storyboard in Resources */,
 				CD0A88A41979992200073718 /* third.png in Resources */,
+				CD6C17461A4374FA009FA29E /* pw.jpg in Resources */,
 				CD0A88E01979A21E00073718 /* README.md in Resources */,
 				CD0A88941979992200073718 /* MainStoryboard_iPad.storyboard in Resources */,
 				CD0A889C1979992200073718 /* icon58x58.png in Resources */,
