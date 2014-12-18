@@ -266,9 +266,9 @@
 				CD0A88631979992200073718 /* AdMobController.h */,
 				CD0A88641979992200073718 /* AdMobController.m */,
 				CD0A88871979992200073718 /* VideoInterstitialViewController.h */,
+				CD0A88881979992200073718 /* VideoInterstitialViewController.m */,
 				CD6C173E1A42064A009FA29E /* NativeAdViewController.h */,
 				CD6C173F1A42064A009FA29E /* NativeAdViewController.m */,
-				CD0A88881979992200073718 /* VideoInterstitialViewController.m */,
 				CD0A88DE1979A13000073718 /* Images */,
 				CD0A883B197998E000073718 /* Supporting Files */,
 			);
