@@ -10,7 +10,12 @@
 #import <CoreLocation/CoreLocation.h>
 #import <TapIt/TapIt.h>
 
-@interface NativeAdViewController : UIViewController <TapItNativeAdDelegate>
+@interface NativeAdViewController : UIViewController <TapItNativeAdDelegate, UITableViewDelegate, UITableViewDataSource> {
+    
+    NSArray *offices;
+    NSIndexPath *currentIndexPath;
+    IBOutlet UITableView *customTable;
+}
 
 @property (nonatomic, retain) TapItNativeAdManager *tiNativeManager;
 

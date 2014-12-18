@@ -194,9 +194,23 @@
                     <view key="view" contentMode="scaleToFill" id="aBw-q4-yUr">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="SxX-2U-R3Q">
+                                <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="5KJ-9a-9pA" id="Ohb-4U-r4E"/>
+                                    <outlet property="delegate" destination="5KJ-9a-9pA" id="dhI-U8-NJl"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Native" image="fourth.png" id="Zl5-1z-VeE"/>
+                    <connections>
+                        <outlet property="customTable" destination="SxX-2U-R3Q" id="Fp5-OQ-P6Q"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aNr-na-vXM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

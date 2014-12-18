@@ -21,7 +21,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+
+    //Fire the ad request
     [self requestNativeAds];
+    
+    // Initialize table data
+    offices = [[NSArray alloc] initWithObjects:@"Austin", @"Miami", @"Rockville", @"New York", @"Chicago", @"Newport Beach", @"San Diego", nil];
 }
 
 - (void)requestNativeAds {
@@ -29,48 +34,98 @@
     tiNativeManager.delegate = self;
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
 //                            @"test", @"mode", // enable test mode to test native ads in your app
+                            @"430189", @"cid",
                             nil];
     
     TapItRequest *request = [TapItRequest requestWithAdZone:ZONE_ID andCustomParameters:params];
     [tiNativeManager getAdsForRequest:request withRequestedNumberOfAds:1];
 }
 
-- (void)labelTapped {
-    [tiNativeManager nativeAdWasTouched:[tiNativeManager.allNativeAds objectAtIndex:0]];
+#pragma mark -
+#pragma mark UITableViewDelegates
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    //Since we are adding one native ad to the end of the list, increase the count by 1.
+    return [offices count]+1;
 }
 
-- (void)showNativeAd {
-    TapItNativeAd *newAd = [tiNativeManager.allNativeAds objectAtIndex:0];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *nativeTableCell = @"NativeTableCell";
     
-    UILabel *titleLabel = [[UILabel alloc] init];
-    [titleLabel setFrame:CGRectMake(10,50,300,20)];
-    titleLabel.backgroundColor=[UIColor clearColor];
-    titleLabel.textColor=[UIColor blackColor];
-    titleLabel.userInteractionEnabled=YES;
-    titleLabel.text = newAd.adTitle;
-    [self.view addSubview:titleLabel];
-    [titleLabel release];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:nativeTableCell];
     
-    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelTapped)];
-    tapGestureRecognizer.numberOfTapsRequired = 1;
-    [titleLabel addGestureRecognizer:tapGestureRecognizer];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nativeTableCell];
+    }
     
-    UILabel *textLabel = [[UILabel alloc] init];
-    [textLabel setFrame:CGRectMake(10,70,300,100)];
-    textLabel.backgroundColor=[UIColor clearColor];
-    textLabel.textColor=[UIColor blackColor];
-    textLabel.userInteractionEnabled=YES;
-    textLabel.text = newAd.adText;
-    [textLabel sizeToFit];
-    [self.view addSubview:textLabel];
-    [textLabel release];
+    NSIndexPath *newIP = [NSIndexPath indexPathForItem:7 inSection:0];
+    if([indexPath isEqual:newIP]) {
+        
+        //We are now at the correct row. If there is a native ad in the array, then show it.
+        if([tiNativeManager.allNativeAds count] > 0) {
+            TapItNativeAd *newAd = [tiNativeManager.allNativeAds objectAtIndex:0];
+            cell.textLabel.text = newAd.adTitle;
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+                NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:newAd.adIconURL]];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    // Update the UI
+                    cell.imageView.image = [UIImage imageWithData:imageData];
+                    //                CGFloat widthScale = 112/cell.imageView.image.size.width;
+                    //                CGFloat heightScale = 84/cell.imageView.image.size.height;
+                    //                //this line will do it!
+                    //                cell.imageView.transform = CGAffineTransformMakeScale(widthScale, heightScale);
+                    [cell setNeedsLayout];
+                });
+            });
+            
+            [tiNativeManager logNativeAdImpression:newAd];
+        }
+    } else {
+        cell.textLabel.text = [offices objectAtIndex:indexPath.row];
+    }
     
-    UIWebView *webview=[[UIWebView alloc]initWithFrame:CGRectMake(10, 90, 300,250)];
-    [webview loadHTMLString:newAd.adHTML baseURL:nil];
-    [self.view addSubview:webview];
-    
-    [tiNativeManager logNativeAdImpression:newAd];
+    return cell;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSIndexPath *newIP = [NSIndexPath indexPathForItem:7 inSection:0];
+    if([indexPath isEqual:newIP]) {
+        //We are now at the correct row. If there is a native ad in the array, then allow it to click through.
+        if([tiNativeManager.allNativeAds count] > 0) {
+            [tiNativeManager nativeAdWasTouched:[tiNativeManager.allNativeAds objectAtIndex:0]];
+        }
+    } else {
+        currentIndexPath = indexPath;
+        NSString *msg = [NSString stringWithFormat:@"Welcome to %@!", [offices objectAtIndex:indexPath.row]];
+        UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:msg
+                                                         message:@"Open in Maps?"
+                                                        delegate:self
+                                               cancelButtonTitle:@"Cancel"
+                                               otherButtonTitles: @"OK", nil];
+        [alert show];
+    }
+    
+    // Deselect the row after selection
+    NSIndexPath *selection = [tableView indexPathForSelectedRow];
+    if (selection) {
+        [tableView deselectRowAtIndexPath:selection animated:YES];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 1)
+    {
+        NSString *addressString = [NSString stringWithFormat:@"http://maps.apple.com/?q=%@", [offices objectAtIndex:currentIndexPath.row]];
+        addressString = [addressString stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+        NSURL *url = [NSURL URLWithString:addressString];
+        [[UIApplication sharedApplication] openURL:url];
+    }
+}
+
 #pragma mark -
 #pragma mark TapItNativeAdDelegate methods
 
@@ -80,7 +135,9 @@
 
 - (void)tapitNativeAdManagerDidLoad:(TapItNativeAdManager *)nativeAdManager {
     NSLog(@"Native Ad Manager has loaded %lu ad(s).", (unsigned long)[nativeAdManager.allNativeAds count]);
-    [self showNativeAd];
+    
+    // Reload table data to incorporate the native ad
+    [customTable reloadData];
 }
 
 - (void)tapitNativeAdManager:(TapItNativeAdManager *)nativeAdManager didFailToReceiveAdWithError:(NSError *)error {

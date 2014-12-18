@@ -187,7 +187,7 @@
                         <segue destination="3" kind="relationship" relationship="viewControllers" id="28"/>
                         <segue destination="XMr-KD-gbP" kind="relationship" relationship="viewControllers" id="SCF-hC-7zv"/>
                         <segue destination="hMg-ub-Xhq" kind="relationship" relationship="viewControllers" id="h39-NP-cq5"/>
-                        <segue destination="sDi-fi-xg3" kind="relationship" relationship="viewControllers" id="UHT-3Y-9u7"/>
+                        <segue destination="YeJ-7s-lAJ" kind="relationship" relationship="viewControllers" id="3eZ-In-DlC"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="14" sceneMemberID="firstResponder"/>
@@ -195,17 +195,31 @@
             <point key="canvasLocation" x="1903" y="1394"/>
         </scene>
         <!--Native-->
-        <scene sceneID="Hk0-cK-Hg2">
+        <scene sceneID="uaZ-eW-4PT">
             <objects>
-                <viewController id="sDi-fi-xg3" customClass="NativeAdViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="bqv-kN-nmB">
+                <viewController id="YeJ-7s-lAJ" customClass="NativeAdViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QeB-ks-BP3">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="lRP-Rx-he2">
+                                <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="YeJ-7s-lAJ" id="FtA-kz-4c9"/>
+                                    <outlet property="delegate" destination="YeJ-7s-lAJ" id="IPO-GA-vma"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Native" image="fourth.png" id="eb1-67-TNT"/>
+                    <tabBarItem key="tabBarItem" title="Native" image="fourth.png" id="6ZQ-LS-YfM"/>
+                    <connections>
+                        <outlet property="customTable" destination="lRP-Rx-he2" id="2Yn-AY-C1f"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Cdi-uz-ect" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZpL-mk-REd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="378" y="779"/>
         </scene>
