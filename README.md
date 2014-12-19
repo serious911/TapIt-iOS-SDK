@@ -245,7 +245,7 @@ TapItRequest *request = [TapItRequest requestWithAdZone:*YOUR ZONE ID* andCustom
 ...
 ````
 
-For a complete example, see https://github.com/tapit/TapIt-iOS-SDK/blob/master/TapIt-iOS-Sample/NativeAdController.m
+For a complete example, see https://github.com/tapit/TapIt-iOS-SDK/blob/master/TapIt-iOS-Sample/NativeAdViewController.m
 
 Listen for location updates
 ---------------------------

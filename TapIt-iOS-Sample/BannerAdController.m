@@ -137,7 +137,7 @@
 }
 
 - (void)tapitBannerAdView:(TapItBannerAdView *)bannerView didFailToReceiveAdWithError:(NSError *)error {
-    NSLog(@"Banner failed to load with the following error: %@", error);
+    NSLog(@"Banner failed to load with the following error: %@", error.localizedDescription);
     // Banner view will hide automatically if docking is enabled
     // if disabled, you'll want to hide bannerView
 }

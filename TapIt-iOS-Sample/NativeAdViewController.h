@@ -15,6 +15,7 @@
     NSArray *offices;
     NSIndexPath *currentIndexPath;
     IBOutlet UITableView *customTable;
+    BOOL didGetAd;
 }
 
 @property (nonatomic, retain) TapItNativeAdManager *tiNativeManager;

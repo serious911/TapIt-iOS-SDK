@@ -9,7 +9,7 @@
 #import "NativeAdViewController.h"
 #import "AppDelegate.h"
 
-#define ZONE_ID @"63283" // for example use only, don't use this zone in your app!
+#define ZONE_ID @"64267" // for example use only, don't use this zone in your app!
 @interface NativeAdViewController ()
 
 @end
@@ -44,8 +44,12 @@
 #pragma mark UITableViewDelegates
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    //Since we are adding one native ad to the end of the list, increase the count by 1.
-    return [offices count]+1;
+    if(didGetAd) {
+        //Since we are adding one native ad to the end of the list, increase the count by 1.
+        return [offices count]+1;
+    } else {
+        return [offices count];
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -59,7 +63,7 @@
     }
     
     NSIndexPath *newIP = [NSIndexPath indexPathForItem:7 inSection:0];
-    if([indexPath isEqual:newIP]) {
+    if([indexPath isEqual:newIP] && didGetAd) {
         
         //We are now at the correct row. If there is a native ad in the array, then show it.
         if([tiNativeManager.allNativeAds count] > 0) {
@@ -90,7 +94,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSIndexPath *newIP = [NSIndexPath indexPathForItem:7 inSection:0];
-    if([indexPath isEqual:newIP]) {
+    if([indexPath isEqual:newIP] && didGetAd) {
         //We are now at row containing the native ad. If there is an ad here, then allow it to click through.
         if([tiNativeManager.allNativeAds count] > 0) {
             [tiNativeManager nativeAdWasTouched:[tiNativeManager.allNativeAds objectAtIndex:0]];
@@ -133,13 +137,15 @@
 
 - (void)tapitNativeAdManagerDidLoad:(TapItNativeAdManager *)nativeAdManager {
     NSLog(@"Native Ad Manager has loaded %lu ad(s).", (unsigned long)[nativeAdManager.allNativeAds count]);
-    
+    didGetAd = TRUE;
     // Reload table data to incorporate the native ad
     [customTable reloadData];
 }
 
 - (void)tapitNativeAdManager:(TapItNativeAdManager *)nativeAdManager didFailToReceiveAdWithError:(NSError *)error {
     NSLog(@"Native Ad Manager failed to load with the following error: %@", error.localizedDescription);
+    didGetAd = FALSE;
+    [customTable reloadData];
 }
 
 - (BOOL)tapitNativeAdManagerActionShouldBegin:(TapItNativeAdManager *)nativeAdManager willLeaveApplication:(BOOL)willLeave {
