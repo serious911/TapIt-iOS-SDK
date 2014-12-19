@@ -34,7 +34,6 @@
     tiNativeManager.delegate = self;
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
 //                            @"test", @"mode", // enable test mode to test native ads in your app
-                            @"430189", @"cid",
                             nil];
     
     TapItRequest *request = [TapItRequest requestWithAdZone:ZONE_ID andCustomParameters:params];
