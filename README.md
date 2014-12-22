@@ -198,16 +198,16 @@ Native Ad Usage
 
 @interface MyViewController : UIViewController <TapItNativeAdDelegate>
 
-@property (nonatomic, retain) TapItNativeAdManager *adManagerNative;
+@property (nonatomic, retain) TapItNativeAdManager *tiNativeManager;
 ...
 
 // in your .m file
 #import <TapIt/TapIt.h>
 ...
-adManagerNative = [[TapItNativeAdManager alloc] init];
-adManagerNative.delegate = self;
+tiNativeManager = [[TapItNativeAdManager alloc] init];
+tiNativeManager.delegate = self;
 TapItRequest *request = [TapItRequest requestWithAdZone:*YOUR ZONE ID* andCustomParameters:params];
-[adManagerNative getAdsForRequest:request withRequestedNumberOfAds:10];
+[tiNativeManager getAdsForRequest:request withRequestedNumberOfAds:10];
 ...
 
 - (void)tapitNativeAdManagerDidLoad:(TapItNativeAdManager *)nativeAdManager {
@@ -235,8 +235,8 @@ TapItRequest *request = [TapItRequest requestWithAdZone:*YOUR ZONE ID* andCustom
 }
 
 - (void)labelTapped {
-    TapItNativeAd *newAd = [adManagerNative.allNativeAds objectAtIndex:0];
-    [adManagerNative nativeAdWasTouched:newAd];
+    TapItNativeAd *newAd = [tiNativeManager.allNativeAds objectAtIndex:0];
+    [tiNativeManager nativeAdWasTouched:newAd];
 }
 
 - (void)tapitNativeAdManager:(TapItNativeAdManager *)nativeAdManager didFailToReceiveAdWithError:(NSError *)error {
@@ -262,7 +262,12 @@ If you want to allow for geo-targeting, listen for location updates in your AppD
 	// start listening for location updates
 	self.locationManager = [[CLLocationManager alloc] init];
 	self.locationManager.delegate = self;
-	[self.locationManager startMonitoringSignificantLocationChanges];
+
+    // iOS 8 check
+    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+    [self.locationManager requestWhenInUseAuthorization];
+    }
+    [self.locationManager startUpdatingLocation];
 }
 ...
 
