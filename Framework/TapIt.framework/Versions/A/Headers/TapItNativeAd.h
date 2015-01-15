@@ -60,4 +60,9 @@
  */
 - (NSString *)adDimension;
 
+/**
+ An `NSDictionary` that contains all of the native ad data for the `TapItNativeAd`.
+ */
+- (NSDictionary *)nativeAdData;
+
 @end

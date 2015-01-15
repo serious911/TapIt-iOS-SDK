@@ -22,3 +22,6 @@
 
 ##Version 3.1 (Tuesday, December 23, 2014)
 * Native Ad support
+
+##Version 3.1.1 (Tuesday, January 20, 2015)
+* Native Ad tweaks
