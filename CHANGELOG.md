@@ -25,3 +25,6 @@
 
 ##Version 3.1.1 (Tuesday, January 20, 2015)
 * Native Ad tweaks
+
+##Version 3.1.2 (Thursday, February 5, 2015)
+* Video TVAST fixes
