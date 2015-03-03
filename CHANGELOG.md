@@ -28,3 +28,6 @@
 
 ##Version 3.1.2 (Thursday, February 5, 2015)
 * Video TVAST fixes
+
+##Version 3.1.3 (Tuesday, March 3, 2015)
+* Browser Controller and Interstitial Close Button customization enhancements

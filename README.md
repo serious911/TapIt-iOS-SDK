@@ -1,7 +1,7 @@
 TapIt iOS SDK
 =============
 
-Version 3.1.2
+Version 3.1.3
 
 This is the iOS SDK for the TapIt! mobile ad network.  Go to http://tapit.com/ for more details and to sign up.
 
@@ -301,3 +301,17 @@ Then, in your ad request, do the following:
     [request updateLocation:myAppDelegate.locationManager.location];
     
 ````
+
+Customization Options
+---------------------
+
+If you want to customize the appearance of the in-app browser controller that appears when a user taps on an ad, follow the below instructions:
+
+1. To customize the background color of the browser controller toolbar, in your app's Info.plist file add the key **pwAdsToolbarBgColor** with the value being the color represented in RGBA format (ex. orange = **255 149 0 1**).
+2. To customize the tint color of the browser controller toolbar items, in your app's Info.plist file add the key **pwAdsToolbarTintColor** with the value being the color represented in RGBA format (ex. blue = **0 0 255 1**).
+
+If you want to customize the appearance of the close button for Interstitial ads, follow the below instructions:
+
+1. Create close button images at 32x32 @1x and 64x64 @2x.
+2. Name the newly created images **pwCustomClose.png** and **pwCustomClose@2x.png**.
+3. Add the pwCustomClose.png and pwCustomClose@2x.png images to your Xcode project.
