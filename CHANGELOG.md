@@ -31,3 +31,6 @@
 
 ##Version 3.1.3 (Tuesday, March 3, 2015)
 * Browser Controller and Interstitial Close Button customization enhancements
+
+##Version 3.1.4 (Tuesday, March 17, 2015)
+* Video & Native impression tracking updates and Native large image URL support

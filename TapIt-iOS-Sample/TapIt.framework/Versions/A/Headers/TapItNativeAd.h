@@ -36,6 +36,11 @@
 - (NSString *)adIconURL;
 
 /**
+ An `NSString` that contains the ad image URL for the `TapItNativeAd`.
+ */
+- (NSString *)adImageURL;
+
+/**
  An `NSString` that contains the ad call to action for the `TapItNativeAd`.
  */
 - (NSString *)adCTA;
@@ -48,7 +53,12 @@
 /**
  An `NSString` that contains the ad impression URL for the `TapItNativeAd`.
  */
-- (NSString *)adImpressionURL;
+- (NSString *)adImpressionURL DEPRECATED_ATTRIBUTE;
+
+/**
+ An `NSArray` that contains the ad impression URLs for the `TapItNativeAd`.
+ */
+- (NSArray *)adImpressionURLs;
 
 /**
  An `NSString` that contains the ad type for the `TapItNativeAd`.
