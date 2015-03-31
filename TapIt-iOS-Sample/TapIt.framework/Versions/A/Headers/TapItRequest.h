@@ -2,9 +2,7 @@
 //  TapItRequest.h
 //  TapIt iOS SDK
 //
-//  Created by Nick Penteado on 4/11/12.
-//  Updated by Carl Zornes on 10/23/13.
-//  Copyright (c) 2013 TapIt!. All rights reserved.
+//  Copyright (c) 2015 TapIt! by Phunware. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -21,16 +19,16 @@
 ///---------------
 
 /**
- Creates the `TapItRequest` object with the specified Zone ID.
+ Creates the `TapItRequest` object with the specified zone ID.
  
- @param zone The Zone ID for which you want to request ads.
+ @param zone The zone ID for which you want to request ads.
  */
 + (TapItRequest *)requestWithAdZone:(NSString *)zone;
 
 /**
- Creates the `TapItRequest` object with the specified Zone ID and any custom parameters.
+ Creates the `TapItRequest` object with the specified zone ID and any custom parameters.
  
- @param zone The Zone ID for which you want to request ads.
+ @param zone The zone ID for which you want to request ads.
  @param theParams An `NSDictionary` with key / value pairs of custom parameters.
  */
 + (TapItRequest *)requestWithAdZone:(NSString *)zone andCustomParameters:(NSDictionary *)theParams;

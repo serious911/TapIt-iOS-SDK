@@ -34,3 +34,6 @@
 
 ##Version 3.1.4 (Tuesday, March 17, 2015)
 * Video & Native impression tracking updates and Native large image URL support
+
+##Version 3.1.5 (Tuesday, March 31, 2015)
+* Video SDK updates and Interstitial fixes for Retina devices

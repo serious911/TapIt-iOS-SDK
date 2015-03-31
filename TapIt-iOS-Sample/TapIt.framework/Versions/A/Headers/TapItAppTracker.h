@@ -2,9 +2,7 @@
 //  TapItAppTracker.h
 //  TapIt iOS SDK
 //
-//  Created by Nick Penteado on 4/11/12.
-//  Updated by Carl Zornes on 10/24/13.
-//  Copyright (c) 2013 TapIt!. All rights reserved.
+//  Copyright (c) 2015 TapIt! by Phunware. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -34,7 +32,7 @@
 ///---------------
 
 ///**
-// Returns 'MaaSAdvertising'
+// Returns 'MaaSAdvertising'.
 // */
 //+ (NSString *)serviceName;
 

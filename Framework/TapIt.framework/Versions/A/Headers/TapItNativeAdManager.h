@@ -2,8 +2,7 @@
 //  TapItNativeAdManager.h
 //  TapIt iOS SDK
 //
-//  Created by Carl Zornes on 10/15/14.
-//  Copyright (c) 2013 TapIt!. All rights reserved.
+//  Copyright (c) 2015 TapIt! by Phunware. All rights reserved.
 //
 
 #import <CoreLocation/CoreLocation.h>
@@ -25,7 +24,7 @@
 ///-----------------------
 
 /**
- Once a `TapItRequest` object is created this function should be called to begin requesting ads for your app.
+ Once a `TapItRequest` object is created, this function should be called to begin requesting ads for your app.
  @param request The ad request with zone information and any custom parameters.
  */
 - (BOOL)getAdsForRequest:(TapItRequest *)request;
@@ -47,8 +46,9 @@
 ///---------------
 
 /**
- Once a `TapItRequest` object is created this function should be called to begin requesting ads for your app.
+ Once a `TapItRequest` object is created, this function should be called to begin requesting ads for your app.
  @param request The ad request with zone information and any custom parameters.
+ @param numberOfAds The number of ads desired for the ad request.
  */
 - (BOOL)getAdsForRequest:(TapItRequest *)request withRequestedNumberOfAds:(int)numberOfAds;
 
@@ -75,7 +75,7 @@
 - (void)resume;
 
 /**
- An `id` that is used to identify the 'TapItNativeAdDelegate' delegate.
+ An `id` used to identify the 'TapItNativeAdDelegate' delegate.
  */
 @property (assign, nonatomic) id<TapItNativeAdDelegate> delegate;
 
@@ -97,6 +97,9 @@
 
 @end
 
+/**
+ `TapItNativeAdDelegate` is needed to receive notifications about native ad status.
+ */
 @protocol TapItNativeAdDelegate <NSObject>
 @optional
 
@@ -132,7 +135,7 @@
  
  This method is called when the user taps the native ad. Your application controls whether the action is triggered. To allow the action to be triggered,
  return YES. To suppress the action, return NO. Your application should almost always allow actions to be triggered; preventing actions may alter the
- advertisements your application sees and reduce the revenue your application earns through TapIt.
+ advertisements your application sees and reduce the revenue your application earns through TapIt! by Phunware.
  
  If the willLeave parameter is YES, then your application is moved to the background shortly after this method returns. In this situation, your method
  implementation does not need to perform additional work. If willLeave is set to NO, then the triggered action will cover your application’s user

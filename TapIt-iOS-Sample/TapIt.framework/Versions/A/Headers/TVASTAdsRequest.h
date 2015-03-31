@@ -2,15 +2,15 @@
 //  TVASTAdsRequest.h
 //  Video Ads SDK
 //
-//  Copyright 2013 TapIt by Phunware Inc. All rights reserved.
+//  Copyright 2015 TapIt! by Phunware. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 
-/// AdsRequest for loading ads from TapIt ad server.
+/// AdsRequest for loading ads from the TapIt! ad server.
 //
-/// Caller can provide ads request key and values that needs to be passed to
+/// The caller can provide ads request key and values that needs to be passed to
 /// TVASTAdsLoader to request ads.
 @interface TVASTAdsRequest : NSObject
 

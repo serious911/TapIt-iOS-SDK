@@ -2,8 +2,6 @@
 //  TVASTAd.h
 //  Video Ads SDK
 //
-//  Created by Kevin Truong on 4/30/13.
-//
 //  Declares TVASTAd interface that has the general representation of an ad.
 
 #import <Foundation/Foundation.h>

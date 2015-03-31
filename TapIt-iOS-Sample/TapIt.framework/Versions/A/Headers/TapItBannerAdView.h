@@ -2,9 +2,7 @@
 //  TapItBannerAdView.h
 //  TapIt iOS SDK
 //
-//  Created by Nick Penteado on 4/11/12.
-//  Updated by Carl Zornes on 10/23/13.
-//  Copyright (c) 2013 TapIt!. All rights reserved.
+//  Copyright (c) 2015 TapIt! by Phunware. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -25,7 +23,7 @@
 ///-----------------------
 
 /**
- Once a `TapItRequest` object is created and `TapItBannerAdView` added to your view, this function should be called to begin serving ads in your app.
+ Once a `TapItRequest` object is created and `TapItBannerAdView` is added to your view, this function should be called to begin serving ads in your app.
  @param request The ad request with zone information and any custom parameters.
  */
 - (BOOL)startServingAdsForRequest:(TapItRequest *)request;
@@ -62,13 +60,14 @@
 - (void)resume;
 
 /**
- Override point to respond to orientation changes.
+ Overrides a point to respond to orientation changes.
+ @param toInterfaceOrientation The interface orientation to which the device has been repositioned.
  */
 - (void)repositionToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation;
 
 
 /**
- An `id` that is used to identify the 'TapItBannerAdViewDelegate' delegate.
+ An `id` used to identify the 'TapItBannerAdViewDelegate' delegate.
  */
 @property (assign, nonatomic) id<TapItBannerAdViewDelegate> delegate;
 
@@ -78,7 +77,7 @@
 @property (assign, nonatomic) BOOL animated;
 
 /**
- A `BOOL` to signify whether or not you want the ad to auto reposition to orientation changes. The default value is `TRUE`.
+ A `BOOL` to signify whether or not you want the ad to automatically reposition to orientation changes. The default value is `TRUE`.
  */
 @property (assign, nonatomic) BOOL autoReposition;
 
@@ -114,6 +113,9 @@
 
 @end
 
+/**
+ A `TapItBannerAdViewDelegate` is needed to receive notifications about the banner ad status.
+ */
 @protocol TapItBannerAdViewDelegate <NSObject>
 @optional
 
@@ -143,13 +145,13 @@
  Called before a banner view executes an action.
  
  @param bannerView The banner view that the user tapped.
- @param willLeave YES if another application will be launched to execute the action; NO if the action is going to be executed inside your appliaction.
+ @param willLeave YES if another application will be launched to execute the action; NO if the action is going to be executed inside your application.
  
  @return Your delegate returns YES if the banner action should execute; NO to prevent the banner action from executing.
  
  This method is called when the user taps the banner view. Your application controls whether the action is triggered. To allow the action to be triggered,
  return YES. To suppress the action, return NO. Your application should almost always allow actions to be triggered; preventing actions may alter the
- advertisements your application sees and reduce the revenue your application earns through TapIt.
+ advertisements your application sees and reduce the revenue your application earns through TapIt! by Phunware.
  
  If the willLeave parameter is YES, then your application is moved to the background shortly after this method returns. In this situation, your method
  implementation does not need to perform additional work. If willLeave is set to NO, then the triggered action will cover your application’s user

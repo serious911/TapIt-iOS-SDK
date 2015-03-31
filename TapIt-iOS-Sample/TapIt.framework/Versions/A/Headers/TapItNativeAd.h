@@ -2,12 +2,14 @@
 //  TapItNativeAd.h
 //  TapIt iOS SDK
 //
-//  Created by Carl Zornes on 11/20/14.
 //
 //
 
 #import <Foundation/Foundation.h>
 
+/**
+ `TapItNativeAd` implements a standard `TapItNativeAd` into your app.
+ */
 @interface TapItNativeAd : NSObject
 
 /**

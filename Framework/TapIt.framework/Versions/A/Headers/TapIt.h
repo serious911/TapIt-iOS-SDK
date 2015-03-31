@@ -2,8 +2,7 @@
 //  TapIt.h
 //  TapIt-iOS-Sample
 //
-//  Created by Nick Penteado on 4/11/12.
-//  Copyright (c) 2012 TapIt!. All rights reserved.
+//  Copyright (c) 2015 TapIt! by Phunware. All rights reserved.
 //
 
 #ifndef TapIt_iOS_SDK_h

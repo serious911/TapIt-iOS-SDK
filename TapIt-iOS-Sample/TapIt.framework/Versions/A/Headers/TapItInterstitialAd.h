@@ -2,9 +2,7 @@
 //  TapItInterstitialAd.h
 //  TapIt iOS SDK
 //
-//  Created by Nick Penteado on 4/11/12.
-//  Updated by Carl Zornes on 10/23/13.
-//  Copyright (c) 2013 TapIt!. All rights reserved.
+//  Copyright (c) 2015 TapIt! by Phunware. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -14,6 +12,9 @@
 
 @class TapItRequest, TapItInterstitialAd;
 
+/**
+ A `TapItInterstitialAdDelegate` is needed to receive notifications about banner ad status.
+ */
 @protocol TapItInterstitialAdDelegate <NSObject>
 
 @required
@@ -67,7 +68,7 @@
  
  When the user taps a presented advertisement, the ad’s delegate is called to inform your application that the user wants to interact with the ad.
  To allow the action to be triggered, your method should return YES; to suppress the action, your method returns NO. Your application should almost
- always allow actions to be triggered; preventing actions may alter the advertisements your application sees and reduce the revenue your application earns through TapIt.
+ always allow actions to be triggered; preventing actions may alter the advertisements your application sees and reduce the revenue your application earns through TapIt! by Phunware.
  
  If the value of the willLeave parameter is YES and your delegate allows the advertisement to execute its action, then your application is moved to
  the background shortly after the call to this method completes.
@@ -81,7 +82,7 @@
 - (BOOL)tapitInterstitialAdActionShouldBegin:(TapItInterstitialAd *)interstitialAd willLeaveApplication:(BOOL)willLeave;
 
 /**
- Called just before uncovering your app after once a cover action has occured.
+ Called just before uncovering your app after a cover action has occured.
  
  @param interstitialAd The full-screen ad that finished executing an action and will soon oncover your app.
  */
@@ -115,19 +116,19 @@
 
 /**
  Once `- (BOOL)loadInterstitialForRequest:(TapItRequest *)request;` has been called and you have received a notification that the ad has loaded, this function should be called to present the ad within your app.
- @param request The ad request with zone information and any custom parameters.
+ @param contoller The view controller from which the ad should be displayed.
  */
 - (void)presentFromViewController:(UIViewController *)contoller;
 //- (void)presentInView:(UIView *)view;
 
 
 /**
- An `id` that is used to identify the 'TapItInterstitialAdDelegate' delegate.
+ An `id` used to identify the 'TapItInterstitialAdDelegate' delegate.
  */
 @property (assign, nonatomic) id<TapItInterstitialAdDelegate> delegate;
 
 /**
- A `BOOL` to signify whether or not you want the ad to animate in or not. The default value is `TRUE`.
+ A `BOOL` to signify whether or not you want the ad to animate in. The default value is `TRUE`.
  */
 @property (assign, nonatomic) BOOL animated;
 
@@ -147,7 +148,7 @@
 @property (assign, nonatomic) TapItAdType allowedAdTypes;
 
 /**
- A readonly `BOOL` to signify whether or not the ad has loaded.
+ A read-only `BOOL` to signify whether or not the ad has loaded.
  */
 @property (readonly) BOOL loaded;
 
@@ -156,6 +157,6 @@
  */
 @property (assign, nonatomic) UIViewController *presentingController;
 
-//@property (assign, nonatomic) TapItInterstitialControlType controlType;
+// @property (assign, nonatomic) TapItInterstitialControlType controlType;
 
 @end
