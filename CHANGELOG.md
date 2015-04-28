@@ -37,3 +37,6 @@
 
 ##Version 3.1.5 (Tuesday, March 31, 2015)
 * Video SDK updates and Interstitial fixes for Retina devices
+
+##Version 3.1.6 (Tuesday, April 28, 2015)
+* Improved handling of incompatible video assets
