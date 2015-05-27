@@ -40,3 +40,6 @@
 
 ##Version 3.1.6 (Tuesday, April 28, 2015)
 * Improved handling of incompatible video assets
+
+##Version 3.1.7 (Wednesday, May 27, 2015)
+* Improved handling of third-party video assets
